@@ -48,7 +48,7 @@ const VacuumConverter2 = () => {
     setOutputUnit(e.target.value);
   };
 
-  if (!results || results.length === 0) {
+  if (loading && (!results || results.length === 0)) {
     return <Loader />;
   }
 

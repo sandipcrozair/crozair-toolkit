@@ -61,7 +61,7 @@ const PressureConverter2 = () => {
     convert();
   };
 
-  if (!results || results.length === 0) {
+  if (loading && (!results || results.length === 0)) {
     return <Loader />;
   }
 
