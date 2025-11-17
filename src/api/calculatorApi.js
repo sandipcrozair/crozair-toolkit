@@ -1,23 +1,29 @@
+// calculatorApi.js
 import axiosClient from "./axiosClient";
 
 const calculatorApi = {
-  getElevation: ({ lat, lon }) => {
-    console.log("Latitude:", lat, "Longitude:", lon);
-    return axiosClient.get(`/elevation/?lat=${lat}&lon=${lon}`);
-  },
-  calculateBoilingPoint: async (payload) => {
-    const response = await axiosClient.post(
-      `/boiling-point-calculator/`,
-      payload
-    );
-    return response;
-  },
-  getReynoldsNumber: (data) => axiosClient.post("/calculators/reynolds", data),
-  getForce: (data) => axiosClient.post("/calculators/force", data),
-  getTorque: (data) => axiosClient.post("/calculators/torque", data),
-  getWorkPower: (data) => axiosClient.post("/calculators/work-power", data),
-  calculateVacuumEvacuation: (data) =>
-    axiosClient.post("/vaccum-evacuation-time/", data),
+  // ELEVATION API
+  getElevation: ({ lat, lon }) =>
+    axiosClient.get(`elevation/?lat=${lat}&lon=${lon}`),
+
+  // BOILING POINT API
+  calculateBoilingPoint: (payload) =>
+    axiosClient.post("boiling-point-calculator/", payload),
+
+  // VACUUM EVACUATION API
+  calculateVacuumEvacuation: (payload) =>
+    axiosClient.post("vaccum-evacuation-time/", payload),
+
+  // PRESSURE CONVERTER (if needed)
+  convertPressure: (payload) =>
+    axiosClient.post("pressure-convertor/", payload),
+
+  // FLOW RATE (if needed)
+  calculateFlowRate: (payload) => axiosClient.post("flow-rate/", payload),
+
+  // BAROMETRIC LEG (if needed)
+  calculateBarometricLeg: (payload) =>
+    axiosClient.post("barometric-leg/", payload),
 };
 
 export default calculatorApi;
