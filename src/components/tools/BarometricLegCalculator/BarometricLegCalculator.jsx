@@ -803,7 +803,7 @@ const BarometricLegCalculator = ({
                 {lastCoordinates && calculationMode === "currentLocation" && (
                   <div className="mt-4 sm:mt-6 p-4 sm:p-6 rounded-xl sm:rounded-2xl border-2 border-blue-100 shadow-md">
                     <div className="flex items-center mb-3 sm:mb-4 text-blue-900">
-                      <svg
+                      {/* <svg
                         className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3"
                         fill="none"
                         stroke="currentColor"
@@ -821,7 +821,7 @@ const BarometricLegCalculator = ({
                           strokeWidth={2}
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
-                      </svg>
+                      </svg> */}
                       <span className="font-bold text-base sm:text-md">
                         Other Information
                       </span>
