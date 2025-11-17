@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/tools/.*",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/calculators/.*",
+      "dest": "/index.html"
+    }
+  ]
+}
