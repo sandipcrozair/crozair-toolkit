@@ -2,113 +2,53 @@
 import axiosClient from "./axiosClient";
 
 const toolsApi = {
-  // ----------------------------
-  // Vacuum Conversion
-  // ----------------------------
   getVacuumConversion: async (payload) => {
     try {
       console.log("Vacuum input:", payload);
-      const res = await axiosClient.post("/vaccum-convertor/", payload);
-      return res.data;
+      const response = await axiosClient.post("/vaccum-convertor/", payload);
+      return response;
     } catch (error) {
-      return handleApiError(error);
+      console.error("Vacuum conversion error:", error);
+      throw error;
     }
   },
 
-  // ----------------------------
-  // Pressure Conversion
-  // ----------------------------
   getPressureConversion: async (payload) => {
     try {
-      console.log("Pressure input:", payload);
-      const res = await axiosClient.post("/pressure-convertor/", payload);
-      return res.data;
+      const response = await axiosClient.post("/pressure-convertor/", payload);
+      return response;
     } catch (error) {
-      return handleApiError(error);
+      console.error("Pressure conversion error:", error);
+      throw error;
     }
   },
 
-  // ----------------------------
-  // Barometric Leg Calculator
-  // ----------------------------
   calculateBarometricLeg: async (payload) => {
     try {
       console.log("Barometric leg input:", payload);
-      const res = await axiosClient.post("/barometric-leg/", payload);
-      return res.data;
+      const response = await axiosClient.post("/barometric-leg/", payload);
+      return response;
     } catch (error) {
-      return handleApiError(error);
+      console.error("Barometric leg calculation error:", error);
+      throw error;
     }
   },
 
-  // ----------------------------
-  // Temperature Converter
-  // ----------------------------
-  getTemperatureConversion: async ({ value, unit }) => {
-    try {
-      console.log("Temperature input:", value, unit);
-      const res = await axiosClient.get("/tools/temperature-converter", {
-        params: { value, unit },
-      });
-      return res.data;
-    } catch (error) {
-      return handleApiError(error);
-    }
-  },
-
-  // ----------------------------
-  // Wind Speed Converter
-  // ----------------------------
-  getWindSpeedConversion: async ({ value, unit }) => {
-    try {
-      console.log("Wind Speed input:", value, unit);
-      const res = await axiosClient.get("/tools/wind-speed-converter", {
-        params: { value, unit },
-      });
-      return res.data;
-    } catch (error) {
-      return handleApiError(error);
+  // Add retry logic for important requests
+  getVacuumConversionWithRetry: async (payload, retries = 3) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const response = await toolsApi.getVacuumConversion(payload);
+        return response;
+      } catch (error) {
+        if (i === retries - 1) throw error;
+        // Wait before retry (exponential backoff)
+        await new Promise((resolve) =>
+          setTimeout(resolve, 1000 * Math.pow(2, i))
+        );
+      }
     }
   },
 };
 
 export default toolsApi;
-
-// ------------------------------------------------
-// Global API Error Handling (Handles 502 Correctly)
-// ------------------------------------------------
-function handleApiError(error) {
-  console.error("API Error:", error);
-
-  if (error.response) {
-    const status = error.response.status;
-
-    // Custom handling for 502
-    if (status === 502) {
-      return {
-        success: false,
-        error: "Server error (502 Bad Gateway). Please try again.",
-      };
-    }
-
-    return {
-      success: false,
-      error: error.response.data?.message || "Something went wrong.",
-      status,
-    };
-  }
-
-  // Network / CORS / server unreachable
-  if (error.request) {
-    return {
-      success: false,
-      error: "Network error — cannot reach server.",
-    };
-  }
-
-  // Unexpected error
-  return {
-    success: false,
-    error: "Unexpected error occurred.",
-  };
-}
