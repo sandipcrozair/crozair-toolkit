@@ -823,7 +823,7 @@ const BarometricLegCalculator = ({
                         />
                       </svg>
                       <span className="font-bold text-base sm:text-md">
-                        Location Details
+                        Other Information
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 text-xs sm:text-sm">
