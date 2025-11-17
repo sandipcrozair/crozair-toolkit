@@ -49,19 +49,19 @@ const calculators = [
       "Lock & calculate any parameter",
     ],
   },
-  {
-    name: "Flow Rate Calculator",
-    subtitle:
-      "Determine volumetric and mass flow rates through pipes and channels accurately.",
-    icon: <Activity className="text-white" size={24} />,
-    path: "flow-rate-calculator",
-    comingSoon: true,
-    category: "Fluid Dynamics",
-    gradient: "from-teal-500 to-blue-500",
-    bgColor: "bg-gradient-to-br from-teal-500 to-blue-500",
-    badgeColor: "bg-teal-100 text-teal-700 border border-teal-200",
-    features: ["Volumetric flow", "Mass flow", "Pipe analysis"],
-  },
+  // {
+  //   name: "Flow Rate Calculator",
+  //   subtitle:
+  //     "Determine volumetric and mass flow rates through pipes and channels accurately.",
+  //   icon: <Activity className="text-white" size={24} />,
+  //   path: "flow-rate-calculator",
+  //   comingSoon: true,
+  //   category: "Fluid Dynamics",
+  //   gradient: "from-teal-500 to-blue-500",
+  //   bgColor: "bg-gradient-to-br from-teal-500 to-blue-500",
+  //   badgeColor: "bg-teal-100 text-teal-700 border border-teal-200",
+  //   features: ["Volumetric flow", "Mass flow", "Pipe analysis"],
+  // },
 ];
 
 export default function Calculators() {
